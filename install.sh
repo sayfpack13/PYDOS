@@ -1,0 +1,1 @@
+apt update -y && apt install git -y && apt install python3 -y && apt install python3-pip && pip3 install pystyle
