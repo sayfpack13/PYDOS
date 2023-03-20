@@ -1,0 +1,1 @@
+python wpdos.py -url url/xmlrpc.php
