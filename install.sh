@@ -1,1 +1,1 @@
-apt update -y && apt install git -y && apt install python3 -y && apt install python3-pip && pip3 install pystyle
+apt update -y && apt install git -y && apt install python3 -y && apt install python3-pip -y && git clone https://github.com/sayfpack13/PYDOS.git && cd PYDOS && pip3 install -r requirements.txt
