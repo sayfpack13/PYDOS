@@ -13,16 +13,14 @@ from fake_useragent import UserAgent
 
 version = "2.2"
 
-def showBanner():
-	with open("lib/banner.txt") as f:
-		print(colored(f.read(), "red") + "[" + version + "]\n")
+
 
 def usageMsg():
 	print("USAGE: python " + sys.argv[0] + "  [HOST] [PORT] [THREADS] [DURATION]"
                 "\nEXAMPLE: python " + sys.argv[0] + "  http://google.com 80 10000 0.01\n")
 	exit(0)
 
-showBanner()
+
  
 ip       = ""
 host_arr = []	
