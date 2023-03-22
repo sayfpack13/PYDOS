@@ -123,6 +123,13 @@ def main(argv):
 	additionalHeaders = args.ah
 	payload = args.d
 
+	if payload and "txt" in payload:
+		f = open(payload, 'r', encoding="utf8")
+		content = f.read()
+		payload = '{"json": "'
+		payload += content
+		payload += '"}'
+
 	if args.g:
 		url = args.g
 		for i in range(args.t):
