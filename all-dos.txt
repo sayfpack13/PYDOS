@@ -1,1 +1,1 @@
-python all-dos2.py -i ip -p port -t 100 -th 100
+python all-dos.py ip port 50000 100
