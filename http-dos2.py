@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import time
 import socket
+from time import sleep
 import random
 from scapy.all import *
 from datetime import datetime
@@ -16,8 +16,8 @@ version = "2.2"
 
 
 def usageMsg():
-	print("USAGE: python " + sys.argv[0] + "  [HOST] [PORT] [THREADS] [DURATION]"
-                "\nEXAMPLE: python " + sys.argv[0] + "  http://google.com 80 10000 0.01\n")
+	print("USAGE: python " + sys.argv[0] + "  [HOST] [PORT] [THREADS]"
+                "\nEXAMPLE: python " + sys.argv[0] + "  http://google.com 80 10000\n")
 	exit(0)
 
 
@@ -46,13 +46,12 @@ if len(sys.argv) == 1:
 		try:
 			port     = int(input("[+]PORT (default: 80) > ") or 80 )
 			threads  = int(input("[+]THREADS (default: 20)> ") or 20 ) 
-			duration  = float(input("[+]DURATION (default: 5 min) > ") or 5 ) 
 			print("")
 			break
 		except:
 			print(colored("Incorrect input!", "red"))
 
-elif len(sys.argv) != 5:
+elif len(sys.argv) != 4:
 	usageMsg()
 else:
 	try:
@@ -61,7 +60,6 @@ else:
 		host_arr = []
 		port     = int(sys.argv[2])
 		threads  = int(sys.argv[3])
-		duration  = float(sys.argv[4])
 	except:
 		usageMsg()
 
@@ -83,7 +81,6 @@ i        = 3
 req      = 0
 err      = 0
 d        = "-------------"
-prog     = (duration * 60.0) / 100.0
 
 while i < len(host_arr):
 	url += host_arr[i] + "/"
@@ -94,8 +91,7 @@ url = url.replace("//", "/")
 for i in range(len(list(host))):
 	d += "-"
 
-print("[*]Author: PixHead")
-print(d)
+
 print("[+]TARGET: " + host + " ¦")
 print(d)
 
@@ -216,10 +212,10 @@ for i in range(threads):
 	except:
 		print(colored("Initialization failed...", "red"))
 
-try:
-	time.sleep(duration * 60)
-except:
-	print(colored("[-]", "yellow") + " ABORT")
 
-print("\nTotal: " + str(req) + ", failed: " + str(err) + "\n")
-sys.exit(0)
+try:
+    while True:
+        sleep(1000000)
+except KeyboardInterrupt:
+    print("\nTotal: " + str(req) + ", failed: " + str(err) + "\n")
+    sys.exit(0)

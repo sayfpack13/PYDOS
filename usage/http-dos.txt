@@ -1,2 +1,2 @@
-python http-dos.py -t 300 -p 'url' -d payload.txt
-python http-dos.py -t 300 -g 'url'
+python http-dos.py -t 300 -p url -d payload.txt
+python http-dos.py -t 300 -g url

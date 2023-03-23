@@ -1,1 +1,1 @@
-python xmlrpc-dos.py -url url/xmlrpc.php
+python xmlrpc-dos.py url
