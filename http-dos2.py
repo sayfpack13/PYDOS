@@ -631,7 +631,7 @@ def main():
 	check_proxies = False
 	download_socks = False
 	proxy_type = 5
-	period = 60
+	period = 600000
 	help = False
 	print("> Mode: [cc/post/head]")#slow]")
 	for n,args in enumerate(sys.argv):

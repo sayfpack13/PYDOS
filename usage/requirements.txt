@@ -1,3 +1,4 @@
+PySocks
 pystyle
 requests
 termcolor
