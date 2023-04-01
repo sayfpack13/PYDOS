@@ -4,3 +4,7 @@ requests
 termcolor
 scapy
 fake-useragent
+pysocks
+socks
+cfscrape
+icmplib
