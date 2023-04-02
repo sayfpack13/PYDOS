@@ -1050,7 +1050,7 @@ def checking(lines, socks_type, ms):
     nums += 1
 
     if (nums+err)%(round(len(proxies)/100*50))<=10 or nums+err<=10:
-        print("Checking: "+str((nums+errlen(proxies))-nums)+"/"+str(nums+errlen(proxies)))
+        print("Checking: "+str(err+len(proxies))+"/"+str(nums+err+len(proxies)))
 
 
 nums = 0
