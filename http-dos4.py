@@ -209,7 +209,7 @@ def Headers(method):
         connection = "Cache-Control: max-age=0\r\n"
         connection += "pragma: no-cache\r\n"
         connection += "X-Forwarded-For: " + spoofer() + "\r\n"
-        if len(payload==0):
+        if len(payload)==0:
             data = str(random._urandom(8))
         else:
             data = payload
