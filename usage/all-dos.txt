@@ -1,1 +1,0 @@
-python all-dos.py ip port 50000 100

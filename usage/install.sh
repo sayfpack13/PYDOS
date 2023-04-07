@@ -1,1 +1,0 @@
-apt update -y && apt install git -y && apt install python3 -y && apt install python3-pip -y && git clone https://github.com/sayfpack13/PYDOS.git && cd PYDOS && pip3 install -r usage/requirements.txt
